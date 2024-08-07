@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:myblog/app/routes/routes.dart';
 
 import '../controllers/onboarding_controller.dart';
 
@@ -13,7 +12,9 @@ class OnboardingView extends GetView<OnboardingController> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 25,),
+            const SizedBox(
+              height: 25,
+            ),
             const Center(
               child: Text(
                 'OnboardingView is working',
@@ -22,10 +23,13 @@ class OnboardingView extends GetView<OnboardingController> {
             ),
             Center(
               child: IconButton(
-                onPressed: (){
+                onPressed: () {
                   controller.finished();
-                }, 
-                icon: const Icon(Icons.home,),),
+                },
+                icon: const Icon(
+                  Icons.home,
+                ),
+              ),
             ),
           ],
         ),

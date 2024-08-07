@@ -1,21 +1,37 @@
 class SigninResponseModel {
-  bool? status;
-  String? message;
+  int? id;
+  String? phone;
+  String? createdAt;
+  String? updatedAt;
   String? token;
+  String? message;
 
-  SigninResponseModel({this.status, this.message, this.token});
+  SigninResponseModel({
+    this.id,
+    this.phone,
+    this.createdAt,
+    this.updatedAt,
+    this.token,
+    this.message,
+  });
 
   SigninResponseModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
+    id = json['data']['id'];
+    phone = json['data']['phone'];
+    createdAt = json['data']['created_at'];
+    updatedAt = json['data']['updated_at'];
+    token = json['data']['token'];
     message = json['message'];
-    token = json['token'];
   }
 
   Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['status'] = status;
-    data['message'] = message;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['phone'] = phone;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     data['token'] = token;
+    data['message'] = message;
     return data;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:myblog/app/modules/auth/views/verify_phone_view.dart';
 
 import '../modules/auth/bindings/bindings.dart';
 import '../modules/auth/views/views.dart';
@@ -14,6 +15,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
+  // ignore: constant_identifier_names
   static const INITIAL = Routes.SPLASH;
 
   static final routes = [
@@ -35,8 +37,8 @@ class AppPages {
       binding: AuthBinding(),
     ),
     GetPage(
-      name: _Paths.PHONE_VERIFICATION,
-      page: () => const PhoneVerificationView(),
+      name: Routes.PHONE_VERIFICATION,
+      page: () => VerifyPhoneView(),
       binding: AuthBinding(),
     ),
     GetPage(

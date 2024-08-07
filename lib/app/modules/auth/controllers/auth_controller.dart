@@ -10,58 +10,48 @@ class AuthController extends GetxController {
   final provider = Get.find<SigninProvider>();
 
   final TextEditingController phoneController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
-  final RxBool _isLoading = false.obs;
-
+  var isLoading = false.obs;
   var isPasswordVisible = false.obs;
-  final passwordController = TextEditingController();
 
   void togglePasswordVisibility() {
     isPasswordVisible.value = !isPasswordVisible.value;
   }
 
-  get isLoading => _isLoading;
-
   @override
   void onInit() {
     super.onInit();
-
-    print("Helloooooooooooooooooooooo "+storage.read("is_displaying_onboarding").toString());
     if (storage.read("is_signedin") == true) {
       Get.offAllNamed(Routes.HOME);
     }
   }
 
   @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
   void onClose() {
     phoneController.dispose();
     passwordController.dispose();
-    //
     super.onClose();
   }
 
-  void signin() {
-    SigninRequestModel signinModel = SigninRequestModel(
-        phone: phoneController.text, password: passwordController.text);
-    provider.postSignin(signinModel).then((response) {
+  void signin() async {
+    isLoading.value = true;
+    try {
+      SigninRequestModel signinModel = SigninRequestModel(
+          phone: phoneController.text, password: passwordController.text);
+      final response = await provider.postSignin(signinModel);
       if (response.isOk) {
-        // Successfully received response
-        // print('Response data: ${response.body?.token}');
-        storage.write("jwt_token", response.body?.token);
+        final data = response.body;
+        storage.write("jwt_token", data?.token);
         storage.write("is_signedin", true);
         Get.offAllNamed(Routes.HOME);
       } else {
-        // Handle error
         Get.snackbar('Error', response.body?.message ?? 'Unknown error');
       }
-    }).catchError((error) {
+    } catch (error) {
       Get.snackbar('Error', error.toString());
-    });
-    
+    } finally {
+      isLoading.value = false;
+    }
   }
 }

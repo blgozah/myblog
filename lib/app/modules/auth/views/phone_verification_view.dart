@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PhoneVerificationView extends GetView {
-  const PhoneVerificationView({Key? key}) : super(key: key);
+  const PhoneVerificationView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -17,7 +17,7 @@ abstract class _Paths {
   static const HOME = '/home';
   static const SIGNIN = '/signin';
   static const SIGNUP = '/signup';
-  static const PHONE_VERIFICATION = '/phone_verification';
+  static const PHONE_VERIFICATION = '/verify_phone';
   static const FORGOT_PASSWORD = '/forgot_password';
   static const SPLASH = '/splash';
   static const ONBOARDING = '/onboarding';
