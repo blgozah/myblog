@@ -1,12 +1,19 @@
 import 'package:get/get.dart';
-import 'package:myblog/app/modules/auth/views/verify_phone_view.dart';
 
+import '../../main_page.dart';
 import '../modules/auth/bindings/bindings.dart';
+import '../modules/auth/views/verify_phone_view.dart';
 import '../modules/auth/views/views.dart';
+import '../modules/bottom_nav/bindings/bottom_nav_binding.dart';
+import '../modules/bottom_nav/views/bottom_nav_view.dart';
+import '../modules/create_post/bindings/create_post_binding.dart';
+import '../modules/create_post/views/create_post_view.dart';
 import '../modules/home/bindings/bindings.dart';
 import '../modules/home/views/views.dart';
 import '../modules/onboarding/bindings/bindings.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
+import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/views/profile_view.dart';
 import '../modules/splash/bindings/bindings.dart';
 import '../modules/splash/views/splash_view.dart';
 
@@ -22,10 +29,9 @@ class AppPages {
     // Home
     GetPage(
       name: _Paths.HOME,
-      page: () => const HomeView(),
+      page: () => HomeView(),
       binding: HomeBinding(),
     ),
-    // Auth
     GetPage(
       name: _Paths.SIGNIN,
       page: () => const SigninView(),
@@ -55,6 +61,21 @@ class AppPages {
       name: _Paths.ONBOARDING,
       page: () => const OnboardingView(),
       binding: OnboardingBinding(),
+    ),
+    GetPage(
+      name: _Paths.CREATE_POST,
+      page: () => CreatePostView(),
+      binding: CreatePostBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.MAIN,
+      page: () => MainPage(),
+      binding: BottomNavBinding(),
     ),
   ];
 }

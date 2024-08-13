@@ -23,7 +23,9 @@ class AuthController extends GetxController {
   void onInit() {
     super.onInit();
     if (storage.read("is_signedin") == true) {
-      Get.offAllNamed(Routes.HOME);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Get.offAllNamed(Routes.MAIN);
+      });
     }
   }
 
@@ -44,7 +46,7 @@ class AuthController extends GetxController {
         final data = response.body;
         storage.write("jwt_token", data?.token);
         storage.write("is_signedin", true);
-        Get.offAllNamed(Routes.HOME);
+        Get.offAllNamed(Routes.MAIN);
       } else {
         Get.snackbar('Error', response.body?.message ?? 'Unknown error');
       }

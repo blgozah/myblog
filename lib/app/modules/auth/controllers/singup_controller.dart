@@ -41,10 +41,8 @@ class SignupController extends GetxController {
     );
 
     try {
-      print("hiiiiiii");
       final response = await provider.postSignup(signupModel);
       if (response.isOk) {
-        print("okkkkkkkkkkk");
         final data = response.body;
         storage.write("phone", data?.phone);
         Get.toNamed(Routes.PHONE_VERIFICATION);
