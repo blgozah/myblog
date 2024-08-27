@@ -5,7 +5,6 @@ import '../modules/auth/bindings/bindings.dart';
 import '../modules/auth/views/verify_phone_view.dart';
 import '../modules/auth/views/views.dart';
 import '../modules/bottom_nav/bindings/bottom_nav_binding.dart';
-import '../modules/bottom_nav/views/bottom_nav_view.dart';
 import '../modules/create_post/bindings/create_post_binding.dart';
 import '../modules/create_post/views/create_post_view.dart';
 import '../modules/home/bindings/bindings.dart';
@@ -69,7 +68,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFILE,
-      page: () => const ProfileView(),
+      page: () => ProfilePage(),
       binding: ProfileBinding(),
     ),
     GetPage(

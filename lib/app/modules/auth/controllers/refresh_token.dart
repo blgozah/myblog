@@ -25,9 +25,9 @@ class RefreshTokenController extends GetxController {
     final RefreshTokenModel? newTokenModel = await _apiProvider.refreshToken();
     if (newTokenModel != null) {
       token.value = newTokenModel.token;
+      print(token.value);
       _storage.write('jwt_token', newTokenModel.token);
-    } else {
-      // Handle error (e.g., log out user)
+      print("token is refreshed");
     }
   }
 }

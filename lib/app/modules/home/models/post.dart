@@ -1,3 +1,5 @@
+import 'package:myblog/app/modules/home/models/user_model.dart';
+
 class Post {
   final int id;
   final String title;
@@ -5,6 +7,7 @@ class Post {
   final String content;
   final String image;
   final String createdAt;
+  final User user;
 
   Post({
     required this.id,
@@ -13,6 +16,7 @@ class Post {
     required this.content,
     required this.image,
     required this.createdAt,
+    required this.user,
   });
 
   factory Post.fromJson(Map<String, dynamic> json) {
@@ -23,6 +27,7 @@ class Post {
       content: json['content'],
       image: json['image'],
       createdAt: json['created_at'],
+      user: User.fromJson(json['user']),
     );
   }
 }

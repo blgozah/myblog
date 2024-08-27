@@ -46,6 +46,7 @@ class AuthController extends GetxController {
         final data = response.body;
         storage.write("jwt_token", data?.token);
         storage.write("is_signedin", true);
+        storage.write("user_id", data?.id);
         Get.offAllNamed(Routes.MAIN);
       } else {
         Get.snackbar('Error', response.body?.message ?? 'Unknown error');

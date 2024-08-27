@@ -15,9 +15,9 @@ class CustomBottomNavBar extends StatelessWidget {
           onTap: (index) {
             controller.changePage(index);
             if (index == 0) {
-              Get.toNamed(Routes.HOME, id: 1); // Navigate to HomeView
+              Get.toNamed(Routes.HOME);
             } else if (index == 2) {
-              Get.toNamed(Routes.PROFILE, id: 1); // Navigate to ProfileView
+              Get.toNamed(Routes.PROFILE);
             }
           },
           items: const [

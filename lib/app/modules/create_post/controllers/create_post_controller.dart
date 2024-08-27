@@ -1,45 +1,49 @@
-import 'dart:io';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:myblog/app/modules/create_post/model/post_create_model.dart';
-import 'package:myblog/app/modules/home/models/post.dart';
-import 'package:myblog/app/routes/app_pages.dart';
+import 'dart:io';
+
 import 'package:myblog/app/modules/create_post/provider/create_post_provider.dart';
 
 class PostController extends GetxController {
-  var posts = <Post>[].obs;
-  var isLoading = true.obs;
-  var selectedImage = Rx<File?>(null);
+  var title = ''.obs;
+  var content = ''.obs;
+  var image = Rxn<File>();
 
+  final ImagePicker _picker = ImagePicker();
   final PostProvider postProvider;
 
   PostController({required this.postProvider});
-
-  void createPosts(PostCreateModel post) async {
-    try {
-      isLoading(true);
-      var respons = await postProvider.createPost(post);
-      print(post);
-      print(respons.body);
-      if (respons.status.isOk) {
-        Get.offAllNamed(Routes.HOME);
-        Get.snackbar('Success', 'Post created successfully');
-      } else {
-        Get.snackbar('Error', 'Failed to create post');
-      }
-    } finally {
-      isLoading(false);
+  void pickImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      image.value = File(pickedFile.path);
     }
   }
 
-  Future<void> pickImage(ImageSource source) async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: source);
+  Future<void> submitPost() async {
+    if (title.value.isEmpty || content.value.isEmpty) {
+      Get.snackbar('Error', 'Title and content cannot be empty');
+      return;
+    }
 
-    if (pickedFile != null) {
-      selectedImage(File(pickedFile.path));
-    } else {
-      Get.snackbar('Error', 'No image selected');
+    try {
+      FormData formData = FormData({
+        'title': title.value,
+        'content': content.value,
+        if (image.value != null)
+          'photo': MultipartFile(image.value!,
+              filename: image.value!.path.split('/').last),
+      });
+
+      final response = await postProvider.createPost(formData);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        Get.snackbar('Success', 'Post created successfully');
+      } else {
+        Get.snackbar('Error', 'Failed to create post: ${response.statusText}');
+      }
+    } catch (e) {
+      Get.snackbar('Error', 'An error occurred: $e');
     }
   }
 }

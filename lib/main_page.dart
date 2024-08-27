@@ -29,18 +29,35 @@ class MainPage extends StatelessWidget {
           } else if (settings.name == Routes.PROFILE) {
             return GetPageRoute(
               settings: settings,
-              page: () => ProfileView(),
+              page: () => ProfilePage(),
             );
           }
           return null;
         },
       ),
       bottomNavigationBar: CustomBottomNavBar(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.toNamed(Routes.CREATE_POST); // Navigate to CreatePostView
-        },
-        child: Icon(Icons.add),
+      floatingActionButton: Container(
+        width: 56,
+        height: 56,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF00C6FF), Color(0xFF0072FF)],
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+          ),
+          shape: BoxShape.circle,
+        ),
+        child: FloatingActionButton(
+          onPressed: () {
+            Get.toNamed(Routes.CREATE_POST);
+          },
+          backgroundColor: Colors
+              .transparent, // Set to transparent to use gradient background
+          elevation: 0,
+          child: Icon(Icons.add,
+              color: Colors
+                  .white), // Remove elevation to ensure gradient background is visible
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
