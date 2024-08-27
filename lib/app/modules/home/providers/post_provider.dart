@@ -9,16 +9,32 @@ class HomeProvider extends GetConnect {
 
   Future<List<Post>> fetchPosts() async {
     await tokenController.refreshToken();
-    final response = await get(
-      'http://myblog.mobaen.com/api/posts',
-      headers: {'Authorization': 'Bearer ${storage.read("jwt_token")}'},
-    );
-    if (response.statusCode == 200) {
-      final data = response.body['data']['data'];
-      return List<Post>.from(data.map((item) => Post.fromJson(item)));
-    } else {
-      throw Exception('Failed to load posts');
+    List<Post> allPosts = [];
+    int currentPage = 1;
+    bool hasMorePages = true;
+
+    while (hasMorePages) {
+      final response = await get(
+        'http://myblog.mobaen.com/api/posts?page=$currentPage',
+        headers: {'Authorization': 'Bearer ${storage.read("jwt_token")}'},
+      );
+
+      if (response.statusCode == 200) {
+        final data = response.body['data']['data'];
+        allPosts
+            .addAll(List<Post>.from(data.map((item) => Post.fromJson(item))));
+
+        // Check if there are more pages
+        int lastPage = response.body['data']['last_page'];
+        hasMorePages = currentPage < lastPage;
+        currentPage++;
+      } else {
+        throw Exception('Failed to load posts');
+      }
     }
+
+    // Reverse the list to show newest posts first
+    return allPosts.reversed.toList();
   }
 
   Future<List<int>> fetchLikes() async {

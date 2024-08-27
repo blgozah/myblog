@@ -8,6 +8,8 @@ class HomeController extends GetxController {
   var likedPosts = <int>[].obs;
   var favoritePosts = <int>[].obs;
   var followedUsers = <int>[].obs;
+  var currentPage = 1;
+  var lastPage = 1;
 
   final HomeProvider provider = HomeProvider();
 
@@ -31,10 +33,13 @@ class HomeController extends GetxController {
 
   Future<void> fetchPosts() async {
     try {
+      isLoading(true);
       var postsResult = await provider.fetchPosts();
       posts.assignAll(postsResult);
     } catch (e) {
       print("Failed to load posts: $e");
+    } finally {
+      isLoading(false);
     }
   }
 
