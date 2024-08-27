@@ -3,6 +3,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 import 'package:myblog/app/modules/create_post/provider/create_post_provider.dart';
+import 'package:myblog/app/routes/app_pages.dart';
 
 class PostController extends GetxController {
   var title = ''.obs;
@@ -31,7 +32,7 @@ class PostController extends GetxController {
         'title': title.value,
         'content': content.value,
         if (image.value != null)
-          'photo': MultipartFile(image.value!,
+          'image': MultipartFile(image.value!,
               filename: image.value!.path.split('/').last),
       });
 
@@ -39,6 +40,7 @@ class PostController extends GetxController {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         Get.snackbar('Success', 'Post created successfully');
+        Get.toNamed(Routes.HOME);
       } else {
         Get.snackbar('Error', 'Failed to create post: ${response.statusText}');
       }

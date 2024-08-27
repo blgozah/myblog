@@ -81,10 +81,10 @@ class ProfileDetailsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CircleAvatar(
-                  radius: 50,
+                  radius: 30,
                   backgroundColor: Colors.grey.shade300,
                   child: profile == null
-                      ? const Icon(Icons.person, size: 50, color: Colors.white)
+                      ? const Icon(Icons.person, size: 30, color: Colors.white)
                       : null,
                 ),
                 const SizedBox(height: 16),
