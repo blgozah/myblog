@@ -1,16 +1,36 @@
 # myblog
 
-A new Flutter project.
+## Overview
 
-## Getting Started
+This Flutter app allows users to create accounts, upload images and posts, follow other creators, and interact with their content by liking or saving posts. Users can also create and edit their profiles.
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- **User Registration/Login**: Create a new account or log in using your mobile number.
+- **Image and Post Upload**: Share images and write captions for your posts.
+- **Follow Creators**: Follow other users to see their posts.
+- **Like and Save Posts**: Interact with posts by liking or saving them.
+- **Profile Management**: Create and edit your profile, including your username and email.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Screenshots
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Sign Up Screen
+
+![Screenshot 2024-08-29 211053](https://github.com/user-attachments/assets/86be8863-261b-42c5-94b7-253fd92c8b46)
+
+### Login Screen
+
+![Screenshot 2024-08-29 211009](https://github.com/user-attachments/assets/25afa4b7-421f-4504-af33-0f36849ca35e)
+
+### Home Screen
+
+![Screenshot 2024-08-29 210623](https://github.com/user-attachments/assets/9c256a9b-3f04-4896-a414-87bf2368a9a8)
+
+### Create Post
+
+![Screenshot 2024-08-29 210728](https://github.com/user-attachments/assets/674dc427-2974-43db-bb1d-b475e07f6b3a)
+
+### Profile Screen
+
+![Screenshot 2024-08-29 210908](https://github.com/user-attachments/assets/d8c6c6ad-4daa-4e7d-9138-2b996244b996)
+
